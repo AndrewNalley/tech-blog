@@ -17,7 +17,11 @@ router.post('/', withAuth, async (req, res) => {
 
 router.put('/:id', withAuth, async (req, res) => {
     try {
-        const updateComment = await Comment.update({
+        const updateComment = await Comment.update(
+            {
+            ...req.body
+            },
+            {
             where: {
                 id: req.params.id,
                 user_id: req.session.user_id,
@@ -29,7 +33,7 @@ router.put('/:id', withAuth, async (req, res) => {
             return;
         }
 
-        res.status(200).json(commentData);
+        res.status(200).json(updateComment);
     } catch (err) {
         res.status(500).json(err);
     }
