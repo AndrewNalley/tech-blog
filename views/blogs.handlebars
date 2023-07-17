@@ -5,6 +5,11 @@
   <p>{{blog.text}}</p>
   <p>Created by {{blog.user.name}} on {{format_date blog.date_created}}</p>
   <p>
+    </div>
+    <div class="text-center">
     <button class="btn btn-primary">Comment</button>
   </p>
+  {{#each comments as |comment| }}
+<p>{{comment.text}}</p>
+  {{/each}}
 </div>
