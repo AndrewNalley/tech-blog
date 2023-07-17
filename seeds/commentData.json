@@ -1,18 +1,27 @@
 [
-    {
-      "text": "This website is for nerds"
-    },
-    {
-      "text": "I, a user, agree with this blog."
-    },
-    {
-      "text": "How do I find Google?"
-    },
-    {
-        "text": "Thank you for writing this blog - it was just what I needed!"
-    },
-    {
-        "text": "Say it again for the people in the back!!"
-    }
-  ]
-  
+  {
+    "user_id": "1",
+    "blog_id": "2",
+    "text": "This website is for nerds"
+  },
+  {
+    "user_id": "2",
+    "blog_id": "3",
+    "text": "I, a user, agree with this blog."
+  },
+  {
+    "user_id": "3",
+    "blog_id": "1",
+    "text": "How do I find Google?"
+  },
+  {
+    "user_id": "1",
+    "blog_id": "3",
+    "text": "Thank you for writing this blog - it was just what I needed!"
+  },
+  {
+    "user_id": "2",
+    "blog_id": "1",
+    "text": "Say it again for the people in the back!!"
+  }
+]
