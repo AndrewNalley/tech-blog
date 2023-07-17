@@ -25,18 +25,14 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const blogData = await Blog.findOne({
-      ...req.body,
       where: {
         id: req.params.id,
+      },
       include: [{ model: User }, { model: Comment }]
-      }
     });
-    const blogs = blogData.map((blog) => blog.get({ plain: true }));
+    const blog = blogData.get({ plain: true });
 
-    res.render('blogs', {
-      blogs,
-      logged_in: req.session.logged_in
-    });
+    res.render('blogs', { blog });
   } catch (err) {
     res.status(400).json(err);
   }
