@@ -1,5 +1,8 @@
 module.exports = {
   format_date: (date) => {
+    if (!date) {
+      return new Date(date).toLocaleDateString();; // Return an empty string if the date is undefined or null
+    }
     // Format date as MM/DD/YYYY
     return date.toLocaleDateString();
   },
