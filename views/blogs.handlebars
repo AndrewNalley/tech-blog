@@ -1,6 +1,6 @@
 
 <div class="text-center">
-  <h2>{{blog.name}}</h2>
+  <h2 blog-id={{blog.id}}>{{blog.name}}</h2>
   <p>{{{get_emoji}}}</p>
   <p>{{blog.text}}</p>
   <p>Created by {{blog.user.name}} on {{format_date blog.date_created}}</p>
