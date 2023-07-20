@@ -8,14 +8,13 @@ router.get('/', async (req, res) => {
     const blogData = await Blog.findAll({
       include: [{ model: User }, { model: Comment }],
     });
-
-    // Serialize data so the template can read it
+    
     const blogs = blogData.map((blog) => blog.get({ plain: true }));
 
     // Pass serialized data and session flag into template
     res.render('blogs', {
       blogs,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -28,11 +27,19 @@ router.get('/:id', async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: [{ model: User }, { model: Comment }]
+      include: [{ model: User }, { model: Comment }],
     });
-    const blog = blogData.get({ plain: true });
+    // Get all comments associated with the blog
+    const commentsData = await Comment.findAll({
+      where: {
+        blog_id: req.params.id,
+      },
+    });
 
-    res.render('blogs', { blog });
+    const blog = blogData.get({ plain: true });
+    const comments = commentsData.map((comment) => comment.get({ plain: true }));
+
+    res.render('blog', { blog, comments });
   } catch (err) {
     res.status(400).json(err);
   }
@@ -59,7 +66,7 @@ router.put('/:id', withAuth, async (req, res) => {
         id: req.params.id,
         user_id: req.session.user_id,
       },
-    })
+    });
     if (!blogData) {
       res.status(404).json({ message: 'No blog found with this id!' });
       return;
@@ -68,7 +75,7 @@ router.put('/:id', withAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-})
+});
 
 router.delete('/:id', withAuth, async (req, res) => {
   try {
